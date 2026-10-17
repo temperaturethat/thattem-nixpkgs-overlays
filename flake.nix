@@ -15,6 +15,7 @@
             emacs-packages
             firefox-extensions
             gnome-extensions
+            haskell-modules
             python-modules
             workarounds
           ]
@@ -30,6 +31,13 @@
             ./pkgs/uncategorized/firefox/extensions/addons.jsonl;
 
         gnome-extensions = import ./pkgs/top-level/gnome-extensions-overlay.nix ./pkgs/desktops/gnome/extensions/manuallyPackaged.nix;
+
+        haskell-modules =
+          import ./pkgs/top-level/haskell-packages-overlay.nix
+            ./pkgs/development/haskell-modules/non-hackage-packages.nix
+            [
+              "firefox-addon-fetcher"
+            ];
 
         python-modules =
           import ./pkgs/top-level/python-packages-overlay.nix ./pkgs/development/python-modules
