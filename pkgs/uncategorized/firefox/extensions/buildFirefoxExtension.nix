@@ -25,6 +25,9 @@ stdenvNoCC.mkDerivation {
     sha256 = hash;
   };
 
+  strictDeps = true;
+  __structuredAttrs = true;
+
   dontUnpack = true;
 
   addonId = guid;

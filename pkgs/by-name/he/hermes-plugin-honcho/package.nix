@@ -16,6 +16,9 @@ stdenvNoCC.mkDerivation rec {
     hash = "sha256-g7RO8gMNZYSoEyw4Py+ORB/PYibwTIonHghmSO7Ms3c=";
   };
 
+  strictDeps = true;
+  __structuredAttrs = true;
+
   sourceRoot = "source/hermes-plugin-honcho";
 
   installPhase = ''
