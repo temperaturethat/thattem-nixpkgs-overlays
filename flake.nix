@@ -31,9 +31,11 @@
 
         gnome-extensions = import ./pkgs/top-level/gnome-extensions-overlay.nix ./pkgs/desktops/gnome/extensions/manuallyPackaged.nix;
 
-        python-modules = import ./pkgs/top-level/python-packages.nix ./pkgs/development/python-modules [
-          "honcho-ai"
-        ];
+        python-modules =
+          import ./pkgs/top-level/python-packages-overlay.nix ./pkgs/development/python-modules
+            [
+              "honcho-ai"
+            ];
 
         workarounds = import ./pkgs/top-level (import ./workarounds);
 
