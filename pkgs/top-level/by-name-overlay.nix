@@ -1,6 +1,6 @@
 baseDirectory:
 
-self: super:
+final: prev:
 
 let
 
@@ -9,16 +9,16 @@ let
     if type != "directory" then
       { }
     else
-      super.lib.mapAttrs (name: _: baseDirectory + "/${shard}/${name}/package.nix") (
+      prev.lib.mapAttrs (name: _: baseDirectory + "/${shard}/${name}/package.nix") (
         builtins.readDir (baseDirectory + "/${shard}")
       );
 
-  packageFiles = super.lib.mergeAttrsList (
-    super.lib.mapAttrsToList namesForShard (builtins.readDir baseDirectory)
+  packageFiles = prev.lib.mergeAttrsList (
+    prev.lib.mapAttrsToList namesForShard (builtins.readDir baseDirectory)
   );
 
 in
 
-super.lib.mapAttrs (
-  name: file: if builtins.hasAttr name super then super."${name}" else self.callPackage file { }
+prev.lib.mapAttrs (
+  name: file: if builtins.hasAttr name prev then prev."${name}" else final.callPackage file { }
 ) packageFiles

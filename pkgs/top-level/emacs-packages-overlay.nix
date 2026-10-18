@@ -1,23 +1,23 @@
 baseDirectory:
 
-self: super: {
+final: prev: {
 
   emacsPackagesFor =
     emacs:
-    ((super.emacsPackagesFor emacs).overrideScope (
-      eself: esuper:
+    ((prev.emacsPackagesFor emacs).overrideScope (
+      efinal: eprev:
 
       let
 
         thattemPackages = import baseDirectory {
-          inherit (super) lib;
-          inherit (self) pkgs;
-        } eself;
+          inherit (prev) lib;
+          inherit (final) pkgs;
+        } efinal;
 
       in
 
-      super.lib.mapAttrs (
-        name: package: if builtins.hasAttr name esuper then esuper."${name}" else package
+      prev.lib.mapAttrs (
+        name: package: if builtins.hasAttr name eprev then eprev."${name}" else package
       ) thattemPackages
       // {
         inherit thattemPackages;

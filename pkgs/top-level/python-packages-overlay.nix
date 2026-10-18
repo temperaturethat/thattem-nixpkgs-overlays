@@ -2,13 +2,13 @@ baseDirectory:
 
 packageList:
 
-self: super: {
+final: prev: {
 
-  pythonPackagesExtensions = super.pythonPackagesExtensions ++ [
+  pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
     (
-      python-self: python-super:
-      super.lib.genAttrs packageList (
-        package: python-super."${package}" or (python-self.callPackage (baseDirectory + "/${package}") { })
+      python-final: python-prev:
+      prev.lib.genAttrs packageList (
+        package: python-prev."${package}" or (python-final.callPackage (baseDirectory + "/${package}") { })
       )
     )
   ];

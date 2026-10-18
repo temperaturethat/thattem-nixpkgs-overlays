@@ -1,7 +1,7 @@
 { pkgs, haskellLib }:
 
-self: super: {
+final: prev: {
 
-  firefox-addon-fetcher = self.callPackage ../tools/haskell/firefox-addon-fetcher { };
+  firefox-addon-fetcher = final.callPackage ../tools/haskell/firefox-addon-fetcher { };
 
 }

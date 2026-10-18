@@ -2,30 +2,30 @@ baseDirectory:
 
 topLevelPackages:
 
-self: super:
+final: prev:
 {
 
-  haskellPackages = super.haskellPackages.extend (
-    hself: hsuper:
+  haskellPackages = prev.haskellPackages.extend (
+    hfinal: hprev:
 
     let
 
       thattemPackages = import baseDirectory {
-        inherit (self) pkgs;
-        inherit (hself) haskellLib;
-      } hself hsuper;
+        inherit (final) pkgs;
+        inherit (hfinal) haskellLib;
+      } hfinal hprev;
 
     in
 
-    super.lib.mapAttrs (
-      name: package: if builtins.hasAttr name hsuper then hsuper."${name}" else package
+    prev.lib.mapAttrs (
+      name: package: if builtins.hasAttr name hprev then hprev."${name}" else package
     ) thattemPackages
   );
 
 }
 
-// super.lib.genAttrs topLevelPackages (
+// prev.lib.genAttrs topLevelPackages (
   package:
-  super."${package}"
-    or (self.haskell.lib.compose.justStaticExecutables self.haskellPackages."${package}")
+  prev."${package}"
+    or (final.haskell.lib.compose.justStaticExecutables final.haskellPackages."${package}")
 )

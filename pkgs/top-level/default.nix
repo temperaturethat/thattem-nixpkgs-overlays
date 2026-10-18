@@ -1,5 +1,5 @@
 overlays:
 
-self: super:
+final: prev:
 
-super.lib.composeManyExtensions overlays self super
+prev.lib.composeManyExtensions overlays final prev

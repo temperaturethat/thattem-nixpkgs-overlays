@@ -1,17 +1,17 @@
 # Workaround: update dconf2nix temporarily
 
-self: super:
+final: prev:
 
 {
 
-  haskellPackages = super.haskellPackages.extend (
-    hself: hsuper: {
+  haskellPackages = prev.haskellPackages.extend (
+    hfinal: hprev: {
 
-      dconf2nix = super.haskell.lib.overrideCabal hsuper.dconf2nix (old: {
+      dconf2nix = prev.haskell.lib.overrideCabal hprev.dconf2nix (old: {
 
         version = "0.1.1-unstable-2026-05-21";
 
-        src = self.fetchFromGitHub {
+        src = final.fetchFromGitHub {
           owner = "thattemperature";
           repo = "dconf2nix";
           rev = "dd1dacf17ed97be48d459e6c72524872fd0e6ab6";
@@ -19,7 +19,7 @@ self: super:
         };
 
         libraryHaskellDepends = old.libraryHaskellDepends ++ [
-          hself.utf8-string
+          hfinal.utf8-string
         ];
       });
 

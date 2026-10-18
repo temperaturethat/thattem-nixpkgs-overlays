@@ -1,10 +1,10 @@
 { lib, pkgs }:
 
-self:
+final:
 
 let
 
-  inherit (self) callPackage;
+  inherit (final) callPackage;
 
 in
 

@@ -1,6 +1,6 @@
 baseDirectory:
 
-self: super:
+final: prev:
 
 let
 
@@ -8,8 +8,8 @@ let
 
   mapReadableNames =
     extensionsList:
-    super.lib.trivial.pipe extensionsList [
-      (super.lib.filter (
+    prev.lib.trivial.pipe extensionsList [
+      (prev.lib.filter (
         extension:
         !(
           (builtins.hasAttr extension.extensionUuid extensionRenames)
@@ -18,8 +18,7 @@ let
       ))
       (map (
         extension:
-        super.lib.nameValuePair (extensionRenames.${extension.extensionUuid}
-          or extension.extensionPortalSlug
+        prev.lib.nameValuePair (extensionRenames.${extension.extensionUuid} or extension.extensionPortalSlug
         ) extension
       ))
       builtins.listToAttrs
@@ -29,11 +28,11 @@ in
 
 {
 
-  gnomeExtensions = super.lib.trivial.pipe { } [
-    (extensions: extensions // (import baseDirectory { inherit (self) callPackage; }))
-    (super.lib.attrValues)
+  gnomeExtensions = prev.lib.trivial.pipe { } [
+    (extensions: extensions // (import baseDirectory { inherit (final) callPackage; }))
+    (prev.lib.attrValues)
     mapReadableNames
-    (extensions: extensions // super.gnomeExtensions)
+    (extensions: extensions // prev.gnomeExtensions)
   ];
 
 }
