@@ -13,7 +13,7 @@
 
 buildPythonPackage rec {
   pname = "honcho-ai";
-  version = "2.5.1";
+  version = "2.7.0";
   pyproject = true;
 
   __structuredAttrs = true;
@@ -21,7 +21,7 @@ buildPythonPackage rec {
   src = fetchPypi {
     pname = "honcho_ai";
     inherit version;
-    hash = "sha256-YWlzHHb4MpivzwgAV7pndOtnnlqrHeS3S7OiceGp3eM=";
+    hash = "sha256-MHhuRC2Qfjyai7LDl1+b5LnygVw+04L02seaJdcTBSg=";
   };
 
   build-system = [
